@@ -15,5 +15,12 @@ RUN apt-get update \
 # install Oracle JDK8
 && apt-get install -y oracle-java8-installer
 
+# set PATH
+# This line is from Dockerfile of kaixhin/torch
+ENV PATH=/root/torch/install/bin:$PATH \
+  LD_LIBRARY_PATH=/root/torch/install/lib:$LD_LIBRARY_PATH \
+  DYLD_LIBRARY_PATH=/root/torch/install/lib:$DYLD_LIBRARY_PATH
+
 RUN luarocks install nngraph
 RUN cd /root && git clone https://github.com/stanfordnlp/treelstm.git
+WORKDIR /root/treelstm
